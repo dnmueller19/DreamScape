@@ -9,19 +9,16 @@ using ClassLibrary1.Potions.Items.Weapons;
 
 namespace ClassLibrary1
 {
-	public class LootItem
+	public class QuestCompletionItem
 	{
 		public Items Details { get; set; }
-		public int DropPercentage { get; set;}
-		public bool DefaultItem { get; set; }
+		public int Quanity { get; set; }
 
 
-
-		public LootItem(Items details, int dropPercentage, bool defaultItem)
+		public QuestCompletionItem(Items details, int quanity)
 		{
 			Details = details;
-			DropPercentage = dropPercentage;
-			DefaultItem = defaultItem;
+			Quanity = quanity;
 		}
 	}
 }
