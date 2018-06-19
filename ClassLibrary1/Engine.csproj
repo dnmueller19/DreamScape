@@ -54,6 +54,7 @@
     <Compile Include="Potions.Items.Weapons\Weapons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestCompletionItem.cs" />
+    <Compile Include="RandomNumber.cs" />
     <Compile Include="World.cs" />
   </ItemGroup>
   <ItemGroup />

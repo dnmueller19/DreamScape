@@ -16,6 +16,7 @@ namespace ClassLibrary1.Monsters.Quest
 		public int Gold { get; set; }
 		public int Level { get; set; }
 		public int ExperiencePoints { get; set; }
+		public Location CurrentLocation { get; set; }
 
 		public List<InventoryItem> Inventory { get; set; }
 		public List<PlayerQuest> Quest { get; set; }
@@ -33,8 +34,8 @@ namespace ClassLibrary1.Monsters.Quest
 		}
 
 		
+		
 
-		//list constructors
 
 
 
