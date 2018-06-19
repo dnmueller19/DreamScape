@@ -14,7 +14,7 @@ namespace ClassLibrary1
 		public Quest Details { get; set; }
 		public bool QuestCompleted { get; set; }
 
-		public PlayerQuest(Quest details, bool questCompleted)
+		public PlayerQuest(Quest details)
 		{
 			Details = details;
 			QuestCompleted = false;

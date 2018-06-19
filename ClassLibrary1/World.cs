@@ -144,7 +144,7 @@ namespace ClassLibrary1
 
 			Quest defeatTheSamurai = new Quest(idDefeatTheSamurai,
 				"Defeat all the Samurai!",
-				"Deafeat all the Samurai in the Forest, collect 3 Headbands and 3 Pieces of Armour", 20, 15);
+				"Deafeat all the Samurai in the Forest, collect 3 Headbands and 3 Pieces of Armor", 20, 15);
 			defeatTheSamurai.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(headBand), 3));
 			defeatTheSamurai.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(pieceOfArmour), 3));
 
@@ -198,7 +198,7 @@ namespace ClassLibrary1
 			Items.Add(new Items(repBlood, "Reptilian Blood", "All The Blood")); //7
 			Items.Add(new Items(vial, "Vial", "Vials")); //8
 			Items.Add(new Items(headBand, "Samurai Headband", "Samurai Headbands")); //9
-			Items.Add(new Items(pieceOfArmour, "Piece of Samurai Armour", "Pieces of Samurai Armour")); //10
+			Items.Add(new Items(pieceOfArmour, "Piece of Samurai Armor", "Pieces of Samurai Armor")); //10
 
 			
 

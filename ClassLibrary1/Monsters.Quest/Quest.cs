@@ -7,19 +7,20 @@ using ClassLibrary1.Potions.Items.Weapons;
 using ClassLibrary1;
 using ClassLibrary1.Locations;
 using ClassLibrary1.Monsters.Quest;
-//Properties of the Player
 
-		public int Gold { get; set; }
-		public int Level { get; set; }
-		public int ExperiencePoints { get; set; }
-		
-		public List<InventoryItem> Inventory { get; set; }
-		public List<PlayerQuest> PlayerQuest { get; set; }
 
 namespace ClassLibrary1.Monsters.Quest
 {
 	public class Quest
-	{
+	{//Properties of the Player
+
+		public int Gold { get; set; }
+		public int Level { get; set; }
+		public int ExperiencePoints { get; set; }
+
+		public List<InventoryItem> Inventory { get; set; }
+		public List<PlayerQuest> PlayerQuest { get; set; }
+
 		//properties (iID,sName, sPluralName, irewardexp, rewardgold)
 
 		public int ID { get; set; }
