@@ -25,7 +25,7 @@ namespace TextAdeventure
 		{
 			InitializeComponent();
 			//add player things here
-			player = new Player(10, 10, 20, 0, 1);
+			player = new Player(10, 1, 20, 0, 10);
 			MoveTo(World.LocationbyID(World.idHome));
 			player.Inventory.Add(new InventoryItem(World.ItemByID(World.knife), 1));
 
@@ -62,13 +62,13 @@ namespace TextAdeventure
 			MoveTo(player.CurrentLocation.LocationSouth);
 		}
 
-		private void btnUsePotion_Click_1(object sender, EventArgs e)
-		{
-
-		}
+		
 
 		private void MoveTo(Location newLocation)
 		{
+			//display current location name and discription 
+			rtbLocation.Text = newLocation.Name + Environment.NewLine;
+			rtbMessages.Text = newLocation.Description + Environment.NewLine;
 
 			// item needed
 			if (!player.HasRequiredItemToEnterLocation(newLocation))
@@ -86,9 +86,7 @@ namespace TextAdeventure
 			btnSouth.Visible = (newLocation.LocationSouth != null);
 			btnWest.Visible = (newLocation.LocationWest != null);
 
-			//display current location name and discription 
-			rtbLocation.Text = newLocation.Name + Environment.NewLine;
-			rtbLocation.Text = newLocation.Description + Environment.NewLine;
+			
 
 			//completely heal the player
 			player.CurrentHP = player.MaxHP;
@@ -106,9 +104,11 @@ namespace TextAdeventure
 				//see if player already has quest
 				if (playerAlreadyHasQuest)
 				{
+					//if player has not completed the quest
 					if (!playerAlreadyCompletedQuest)
 					{
 						bool playerHasAllItemsToCompleteQuest = player.HasAllQuestCompletionItems(newLocation.QuestAvailableHere);
+
 						// The player has all items required to complete the quest
 						if (playerHasAllItemsToCompleteQuest)
 						{
@@ -123,7 +123,7 @@ namespace TextAdeventure
 							rtbMessages.Text = "You recieve:" + Environment.NewLine;
 							rtbMessages.Text = newLocation.QuestAvailableHere.RewardEXP.ToString() + "EXP" + Environment.NewLine;
 							rtbMessages.Text = newLocation.QuestAvailableHere.RewardGold.ToString() + " pieces of gold" + Environment.NewLine;
-							rtbMessages.Text = newLocation.QuestAvailableHere.RewardItem.ToString() + Environment.NewLine;
+							rtbMessages.Text = newLocation.QuestAvailableHere.RewardItem.Name + Environment.NewLine;
 							rtbMessages.Text = Environment.NewLine;
 
 							player.ExperiencePoints += newLocation.QuestAvailableHere.RewardEXP;
@@ -162,6 +162,7 @@ namespace TextAdeventure
 						}
 					}
 					rtbMessages.Text += Environment.NewLine;
+
 					// Add the quest to the player's quest list
 					player.Quest.Add(new PlayerQuest(newLocation.QuestAvailableHere));
 				}
@@ -304,7 +305,7 @@ namespace TextAdeventure
 
 			dgvQuests.ColumnCount = 2;
 			dgvQuests.Columns[0].Name = "Name";
-			dgvQuests.Columns[0].Width = 197;
+			dgvQuests.Columns[0].Width = 110;
 			dgvQuests.Columns[1].Name = "Done?";
 
 			dgvQuests.Rows.Clear();
@@ -325,7 +326,7 @@ namespace TextAdeventure
 
 			dgvInventory.ColumnCount = 2;
 			dgvInventory.Columns[0].Name = "Name";
-			dgvInventory.Columns[0].Width = 197;
+			dgvInventory.Columns[0].Width = 110;
 			dgvInventory.Columns[1].Name = "Quanity";
 
 			dgvInventory.Rows.Clear();
@@ -342,18 +343,6 @@ namespace TextAdeventure
 				}
 			}
 		}
-
-		//here accidents here
-		private void TextAdventure_Load(object sender, EventArgs e)
-		{
-
-		}
-
-		private void label5_Click(object sender, EventArgs e)
-		{
-
-		}
-
 
 		//put weapon button here
 		private void btnUseWeapon_Click(object sender, EventArgs e)
@@ -411,6 +400,47 @@ namespace TextAdeventure
 
 			}
 
+		}
+		private void btnUsePotion_Click_1(object sender, EventArgs e)
+		{
+			HealingPotion potion = (HealingPotion)cboPotions.SelectedItem;
+
+			player.CurrentHP = (player.CurrentHP + potion.AmountToHeal);
+
+			if (player.CurrentHP > player.MaxHP)
+			{
+				player.CurrentHP = player.MaxHP;
+			}
+
+			foreach (InventoryItem ii in player.Inventory)
+			{
+				if (ii.Details.ID == potion.ID)
+				{
+					ii.Quantity++;
+					break;
+				}
+			}
+
+			rtbMessages.Text += "you drank a " + potion.Name + Environment.NewLine;
+
+			int damageToPlayer = RandomNumber.NumbeBetween(0, currentMonster.MaxDamage);
+
+			rtbMessages.Text += "The " + currentMonster.Name + "did" + damageToPlayer.ToString() + " points of damage" + Environment.NewLine;
+
+			//subtract from players HP
+			player.CurrentHP -= damageToPlayer;
+
+			if (player.CurrentHP <= 0)
+			{
+				rtbMessages.Text += "The " + currentMonster.Name + " killed you" + Environment.NewLine;
+
+				MoveTo(World.LocationbyID(World.idHome));
+
+			}
+			//refesh player data at UI
+			lblHitPoints.Text = player.CurrentHP.ToString();
+			UpdateInventoryListInUI();
+			UpdatePotionsListInUI();
 		}
 	}
 

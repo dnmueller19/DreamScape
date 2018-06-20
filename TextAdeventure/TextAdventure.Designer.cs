@@ -128,17 +128,16 @@
 			// lblAction
 			// 
 			this.lblAction.AutoSize = true;
-			this.lblAction.Location = new System.Drawing.Point(617, 531);
+			this.lblAction.Location = new System.Drawing.Point(474, 559);
 			this.lblAction.Name = "lblAction";
 			this.lblAction.Size = new System.Drawing.Size(103, 20);
 			this.lblAction.TabIndex = 8;
 			this.lblAction.Text = "Select Action";
-			this.lblAction.Click += new System.EventHandler(this.label5_Click);
 			// 
 			// cboWeapons
 			// 
 			this.cboWeapons.FormattingEnabled = true;
-			this.cboWeapons.Location = new System.Drawing.Point(369, 559);
+			this.cboWeapons.Location = new System.Drawing.Point(347, 580);
 			this.cboWeapons.Name = "cboWeapons";
 			this.cboWeapons.Size = new System.Drawing.Size(121, 28);
 			this.cboWeapons.TabIndex = 9;
@@ -146,14 +145,14 @@
 			// cboPotions
 			// 
 			this.cboPotions.FormattingEnabled = true;
-			this.cboPotions.Location = new System.Drawing.Point(369, 593);
+			this.cboPotions.Location = new System.Drawing.Point(347, 624);
 			this.cboPotions.Name = "cboPotions";
 			this.cboPotions.Size = new System.Drawing.Size(121, 28);
 			this.cboPotions.TabIndex = 10;
 			// 
 			// btnUseWeapon
 			// 
-			this.btnUseWeapon.Location = new System.Drawing.Point(621, 559);
+			this.btnUseWeapon.Location = new System.Drawing.Point(582, 580);
 			this.btnUseWeapon.Name = "btnUseWeapon";
 			this.btnUseWeapon.Size = new System.Drawing.Size(75, 28);
 			this.btnUseWeapon.TabIndex = 11;
@@ -163,7 +162,7 @@
 			// 
 			// btnUsePotion
 			// 
-			this.btnUsePotion.Location = new System.Drawing.Point(620, 593);
+			this.btnUsePotion.Location = new System.Drawing.Point(582, 624);
 			this.btnUsePotion.Name = "btnUsePotion";
 			this.btnUsePotion.Size = new System.Drawing.Size(75, 28);
 			this.btnUsePotion.TabIndex = 12;
@@ -173,9 +172,9 @@
 			// 
 			// btnNorth
 			// 
-			this.btnNorth.Location = new System.Drawing.Point(573, 432);
+			this.btnNorth.Location = new System.Drawing.Point(597, 431);
 			this.btnNorth.Name = "btnNorth";
-			this.btnNorth.Size = new System.Drawing.Size(75, 28);
+			this.btnNorth.Size = new System.Drawing.Size(75, 40);
 			this.btnNorth.TabIndex = 13;
 			this.btnNorth.Text = "North";
 			this.btnNorth.UseVisualStyleBackColor = true;
@@ -183,9 +182,9 @@
 			// 
 			// btnEast
 			// 
-			this.btnEast.Location = new System.Drawing.Point(502, 466);
+			this.btnEast.Location = new System.Drawing.Point(514, 466);
 			this.btnEast.Name = "btnEast";
-			this.btnEast.Size = new System.Drawing.Size(75, 28);
+			this.btnEast.Size = new System.Drawing.Size(75, 40);
 			this.btnEast.TabIndex = 14;
 			this.btnEast.Text = "East";
 			this.btnEast.UseVisualStyleBackColor = true;
@@ -193,9 +192,9 @@
 			// 
 			// btnSouth
 			// 
-			this.btnSouth.Location = new System.Drawing.Point(573, 500);
+			this.btnSouth.Location = new System.Drawing.Point(595, 507);
 			this.btnSouth.Name = "btnSouth";
-			this.btnSouth.Size = new System.Drawing.Size(75, 28);
+			this.btnSouth.Size = new System.Drawing.Size(75, 40);
 			this.btnSouth.TabIndex = 15;
 			this.btnSouth.Text = "South";
 			this.btnSouth.UseVisualStyleBackColor = true;
@@ -203,9 +202,9 @@
 			// 
 			// btnWest
 			// 
-			this.btnWest.Location = new System.Drawing.Point(645, 466);
+			this.btnWest.Location = new System.Drawing.Point(678, 466);
 			this.btnWest.Name = "btnWest";
-			this.btnWest.Size = new System.Drawing.Size(75, 28);
+			this.btnWest.Size = new System.Drawing.Size(75, 40);
 			this.btnWest.TabIndex = 16;
 			this.btnWest.Text = "West";
 			this.btnWest.UseVisualStyleBackColor = true;
@@ -213,7 +212,7 @@
 			// 
 			// rtbLocation
 			// 
-			this.rtbLocation.Location = new System.Drawing.Point(347, 19);
+			this.rtbLocation.Location = new System.Drawing.Point(347, 20);
 			this.rtbLocation.Name = "rtbLocation";
 			this.rtbLocation.ReadOnly = true;
 			this.rtbLocation.Size = new System.Drawing.Size(360, 105);
@@ -263,7 +262,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(728, 644);
+			this.ClientSize = new System.Drawing.Size(828, 744);
 			this.Controls.Add(this.dgvQuests);
 			this.Controls.Add(this.dgvInventory);
 			this.Controls.Add(this.rtbMessages);
@@ -286,8 +285,7 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Name = "TextAdventure";
-			this.Text = "My Game";
-			this.Load += new System.EventHandler(this.TextAdventure_Load);
+			this.Text = "DreamScape";
 			((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dgvQuests)).EndInit();
 			this.ResumeLayout(false);

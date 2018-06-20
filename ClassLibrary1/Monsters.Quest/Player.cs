@@ -36,15 +36,18 @@ namespace ClassLibrary1.Monsters.Quest
 		{
 			if (location.ItemRequiredToEnter == null)
 			{
+				//if no required item for this location, return true
 				return true;	
 			}
 			foreach (InventoryItem ii in Inventory)
 			{
 				if (ii.Details.ID == location.ItemRequiredToEnter.ID)
 				{
+					//we found the required item in inventory, return true
 					return true;
 				}
 			}
+			//we don't find the required item return false
 			return false;
 		}
 

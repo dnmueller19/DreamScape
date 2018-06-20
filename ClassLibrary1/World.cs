@@ -74,17 +74,18 @@ namespace ClassLibrary1
 
 		//add those varibles to each of the list for items location and mosnter
 		//create/populate new quests for the quests/locagtions/monsters
+				//haven't added monseters or quests yet....
 		private static void PopulateLocations()
 		{
 			Location home = new Location(idHome, "Home", "Your room is dark and for the first time you feel uneasy in your own house");
 			Location townSquare = new Location(idTownSquare, "Town Square", "The square is empty...shops that are normally bustling with customers appear dark and desserted");
-			Location desert = new Location(idDesert, "Desert", "");
-			Location forest = new Location(idForest, "Forsest", "");
-			Location city = new Location(idCity, "City", "");
-			Location garden = new Location(idGarden, "Mansion Garden", "");
-			Location mansion = new Location(idMansion, "Mansion", "");
-			Location gaurdPost = new Location(idGaurdPost, "Gaurd Post", "");
-			Location compund = new Location(idCompound, "Compund", "");
+			Location desert = new Location(idDesert, "Desert", "desert text being added");
+			Location forest = new Location(idForest, "Forsest", "forest txt being added");
+			Location city = new Location(idCity, "City", "city text being added");
+			Location garden = new Location(idGarden, "Mansion Garden", " garden text being added");
+			Location mansion = new Location(idMansion, "Mansion", "mansion text being added");
+			Location gaurdPost = new Location(idGaurdPost, "Gaurd Post", "gaurd post text being added");
+			Location compund = new Location(idCompound, "Compund", "coumpound text being added");
 
 
 			//link locations 
@@ -118,6 +119,9 @@ namespace ClassLibrary1
 
 			//from compund
 			compund.LocationWest = gaurdPost;
+
+			//from city
+			city.LocationNorth = forest;
 
 			//add loctions to static locations list
 			Locations.Add(home);
