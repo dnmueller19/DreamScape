@@ -38,9 +38,7 @@ namespace TextAdeventure
 			lblLevel.Text = player.Level.ToString();
 			lblExperience.Text = player.ExperiencePoints.ToString();
 
-			//Location 
-			//Location test1 = new Location(1, "Home", "This is your house");
-			//Location location = new Location(1, "Home", "This is your house", null, null, null);
+
 		}
 		private void btnNorth_Click(object sender, EventArgs e)
 		{
@@ -62,13 +60,14 @@ namespace TextAdeventure
 			MoveTo(player.CurrentLocation.LocationSouth);
 		}
 
-		
+
 
 		private void MoveTo(Location newLocation)
 		{
 			//display current location name and discription 
 			rtbLocation.Text = newLocation.Name + Environment.NewLine;
-			rtbMessages.Text = newLocation.Description + Environment.NewLine;
+			rtbLocation.Text += Environment.NewLine;
+			rtbLocation.Text += newLocation.Description + Environment.NewLine;
 
 			// item needed
 			if (!player.HasRequiredItemToEnterLocation(newLocation))
@@ -86,7 +85,7 @@ namespace TextAdeventure
 			btnSouth.Visible = (newLocation.LocationSouth != null);
 			btnWest.Visible = (newLocation.LocationWest != null);
 
-			
+
 
 			//completely heal the player
 			player.CurrentHP = player.MaxHP;
@@ -127,6 +126,8 @@ namespace TextAdeventure
 							rtbMessages.Text = Environment.NewLine;
 
 							player.ExperiencePoints += newLocation.QuestAvailableHere.RewardEXP;
+
+
 							player.Gold += newLocation.QuestAvailableHere.RewardGold;
 
 							// Add the reward item to the player's inventory
@@ -249,7 +250,7 @@ namespace TextAdeventure
 			{
 				//2b. hide the potion cbo and btn
 				cboPotions.Visible = false;
-				btnUseWeapon.Visible = false;
+				btnUsePotion.Visible = false;
 			}
 			//2c. else: cbo(dataspurce: hp(list))...all smae ad weapons above
 			else
@@ -306,7 +307,7 @@ namespace TextAdeventure
 			dgvQuests.ColumnCount = 2;
 			dgvQuests.Columns[0].Name = "Name";
 			dgvQuests.Columns[0].Width = 110;
-			dgvQuests.Columns[1].Name = "Done?";
+			dgvQuests.Columns[1].Name = "Completed";
 
 			dgvQuests.Rows.Clear();
 
@@ -368,11 +369,11 @@ namespace TextAdeventure
 
 				//give player EXP
 				player.ExperiencePoints += currentMonster.RewardEXP;
-				rtbMessages.Text += "you recieved " + currentMonster.RewardEXP.ToString() + " EXP" + Environment.NewLine;
+				rtbMessages.Text += "You recieved " + currentMonster.RewardEXP.ToString() + " EXP" + Environment.NewLine;
 
 				//give player gold
 				player.Gold += currentMonster.RewardGold;
-				rtbMessages.Text += "you recieved " + currentMonster.RewardGold.ToString() + " pieces of gold" + Environment.NewLine;
+				rtbMessages.Text += "You recieved " + currentMonster.RewardGold.ToString() + " pieces of gold" + Environment.NewLine;
 
 				//get random loot 
 				//create a new list
@@ -398,7 +399,65 @@ namespace TextAdeventure
 					}
 				}
 
+				//add looted items to player inventory (for each)
+				foreach (InventoryItem invetItem in lootedItems)
+				{
+					player.AddItemToInventory(invetItem.Details);
+					if (invetItem.Quantity == 1)
+					{
+						rtbMessages.Text += "You looted " + invetItem.Quantity.ToString() + " " + invetItem.Details.Name + Environment.NewLine;
+					}
+					else
+					{
+						rtbMessages.Text += "You looted " + invetItem.Quantity.ToString() + " " + invetItem.Details.PluralName + Environment.NewLine;
+					}
+				}
+				//refresh players inventory and information
+				lblHitPoints.Text = player.CurrentHP.ToString();
+				lblGold.Text = player.Gold.ToString();
+				lblLevel.Text = player.Level.ToString();
+				lblExperience.Text = player.ExperiencePoints.ToString();
+
+				UpdateInventoryListInUI();
+				UpdatePotionsListInUI();
+				UpdatePotionsListInUI();
+
+				//add blank line to teh message box
+				rtbMessages.Text += Environment.NewLine;
+
+				//put player back in current location to heal player and create new monster 
+				MoveTo(player.CurrentLocation);
 			}
+
+			else
+			{
+				// Monster is still alive
+				//Determine the amount of damage the monster does to the player
+				int damageToPlayer = RandomNumber.NumbeBetween(0, currentMonster.MaxDamage);
+
+				//Display message
+				rtbMessages.Text += "The " + currentMonster.Name + " did " + damageToPlayer.ToString() + " damage to you!" + Environment.NewLine;
+
+				//Subtract damage from player’s CurrentHitPoints
+				player.CurrentHP -= damageToPlayer;
+
+				//Refresh player data in UI
+				lblHitPoints.Text = player.CurrentHP.ToString();
+
+				//If player is dead (zero hit points remaining)
+				if (player.CurrentHP <= 0)
+				{   //Display message
+					rtbMessages.Text += "The " + currentMonster.Name + " killed you!" + Environment.NewLine;
+
+					//Move player to “Home” location
+					MoveTo(World.LocationbyID(World.idHome));
+				}
+
+
+			}
+
+
+
 
 		}
 		private void btnUsePotion_Click_1(object sender, EventArgs e)
@@ -412,16 +471,19 @@ namespace TextAdeventure
 				player.CurrentHP = player.MaxHP;
 			}
 
+			//remove from inventory
 			foreach (InventoryItem ii in player.Inventory)
 			{
 				if (ii.Details.ID == potion.ID)
 				{
-					ii.Quantity++;
+					ii.Quantity--;
 					break;
 				}
 			}
 
 			rtbMessages.Text += "you drank a " + potion.Name + Environment.NewLine;
+
+			//monster get attack turn
 
 			int damageToPlayer = RandomNumber.NumbeBetween(0, currentMonster.MaxDamage);
 
@@ -444,23 +506,23 @@ namespace TextAdeventure
 		}
 	}
 
-	
-
-
-	
-
-	
 
 
 
-	
+
+
+
+
+
+
+
 }
 
-	
 
 
-		
-	
+
+
+
 
 
 

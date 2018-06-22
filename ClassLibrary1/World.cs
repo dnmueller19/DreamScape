@@ -53,7 +53,7 @@ namespace ClassLibrary1
 
 		//Quests
 		//clear the mansion garden of retilians
-		public const int idClearTheGarden = 1;
+		public const int idClearTheMansion = 1;
 
 		//defear al the samurai 
 		public const int idDefeatTheSamurai = 2;
@@ -79,13 +79,42 @@ namespace ClassLibrary1
 		{
 			Location home = new Location(idHome, "Home", "Your room is dark and for the first time you feel uneasy in your own house");
 			Location townSquare = new Location(idTownSquare, "Town Square", "The square is empty...shops that are normally bustling with customers appear dark and desserted");
-			Location desert = new Location(idDesert, "Desert", "desert text being added");
-			Location forest = new Location(idForest, "Forsest", "forest txt being added");
-			Location city = new Location(idCity, "City", "city text being added");
-			Location garden = new Location(idGarden, "Mansion Garden", " garden text being added");
-			Location mansion = new Location(idMansion, "Mansion", "mansion text being added");
-			Location gaurdPost = new Location(idGaurdPost, "Gaurd Post", "gaurd post text being added");
-			Location compund = new Location(idCompound, "Compund", "coumpound text being added");
+
+			Location desert = new Location(idDesert, "Desert", "desert text being added")
+			{
+				QuestAvailableHere = QuestByID(idCollectFromCult)
+			};
+
+			Location forest = new Location(idForest, "Forsest", "forest txt being added")
+			{
+				QuestAvailableHere = QuestByID(idDefeatTheSamurai)
+			};
+
+
+			Location city = new Location(idCity, "City", "city text being added")
+			{
+				MonsterLivingHere = MonsterByID(samurai)
+			};
+
+			Location garden = new Location(idGarden, "Mansion Garden", " garden text being added")
+			{
+				QuestAvailableHere = QuestByID(idClearTheMansion)
+			};
+
+			Location mansion = new Location(idMansion, "Mansion", "mansion text being added")
+			{
+				MonsterLivingHere = MonsterByID(repTilian)
+			};
+
+			Location gaurdPost = new Location(idGaurdPost, "Gaurd Post", "gaurd post text being added")
+			{
+				MonsterLivingHere = MonsterByID(cultMember)
+			};
+
+			Location compund = new Location(idCompound, "Compund", "coumpound text being added")
+			{
+				ItemRequiredToEnter = ItemByID(medallion)
+			};
 
 
 			//link locations 
@@ -140,11 +169,14 @@ namespace ClassLibrary1
 
 		private static void PopulateQuests()
 		{
-			Quest clearTheGarden = new Quest(idClearTheGarden,
-												"Clear the Mansion's Garden",
-												"Defeat all the Reptilians in the Mansion's Garden, collect 3 skins and 3 vials of blood. You will recieve a healing potion and 10 pieces of gold", 15, 10);
-			clearTheGarden.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(reptilianSkin), 3));
-			clearTheGarden.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(repBlood), 3));
+			Quest clearTheMansion = new Quest(idClearTheMansion,
+												"Clear the Mansion",
+												"Defeat all the Reptilians in the Mansion, collect 3 skins and 3 vials of blood. You will recieve a healing potion and 10 pieces of gold", 15, 10);
+			clearTheMansion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(reptilianSkin), 3));
+			clearTheMansion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(repBlood), 3));
+			clearTheMansion.RewardItem = ItemByID(healingPotion);
+		
+		
 
 			Quest defeatTheSamurai = new Quest(idDefeatTheSamurai,
 				"Defeat all the Samurai!",
@@ -157,6 +189,9 @@ namespace ClassLibrary1
 				"Defeat the Cult Guard and collect a medallion", 25, 30);
 			collectFromTheCult.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(medallion), 1));
 
+			Quests.Add(clearTheMansion);
+			Quests.Add(defeatTheSamurai);
+			Quests.Add(collectFromTheCult);
 				
 
 												
@@ -168,7 +203,7 @@ namespace ClassLibrary1
 			//reptilian
 			Monster reptilian = new Monster(repTilian, "Reptilian", 3, 5, 10, 3, 3);
 			reptilian.LootTable.Add(new LootItem(ItemByID(reptilianSkin), 75, false));
-			reptilian.LootTable.Add(new LootItem(ItemByID(repBlood), 80, true));
+			reptilian.LootTable.Add(new LootItem(ItemByID(repBlood), 80, false));
 
 			//cult member
 			Monster cultyMem = new Monster(cultMember, "Cult Member", 20, 15, 40, 10, 10);
@@ -176,7 +211,7 @@ namespace ClassLibrary1
 
 			//Samurai
 			Monster _samurai = new Monster(samurai, "Samurai", 5, 8, 12, 5, 5);
-			_samurai.LootTable.Add(new LootItem(ItemByID(headBand), 70, true));
+			_samurai.LootTable.Add(new LootItem(ItemByID(headBand), 70, false));
 			_samurai.LootTable.Add(new LootItem(ItemByID(pieceOfArmour), 75, false));
 			
 
@@ -203,10 +238,6 @@ namespace ClassLibrary1
 			Items.Add(new Items(vial, "Vial", "Vials")); //8
 			Items.Add(new Items(headBand, "Samurai Headband", "Samurai Headbands")); //9
 			Items.Add(new Items(pieceOfArmour, "Piece of Samurai Armor", "Pieces of Samurai Armor")); //10
-
-			
-
-
 
 		}
 		/// <summary>

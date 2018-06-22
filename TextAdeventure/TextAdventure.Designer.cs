@@ -154,7 +154,7 @@
 			// 
 			this.btnUseWeapon.Location = new System.Drawing.Point(582, 580);
 			this.btnUseWeapon.Name = "btnUseWeapon";
-			this.btnUseWeapon.Size = new System.Drawing.Size(75, 28);
+			this.btnUseWeapon.Size = new System.Drawing.Size(75, 40);
 			this.btnUseWeapon.TabIndex = 11;
 			this.btnUseWeapon.Text = "Use";
 			this.btnUseWeapon.UseVisualStyleBackColor = true;
@@ -164,7 +164,7 @@
 			// 
 			this.btnUsePotion.Location = new System.Drawing.Point(582, 624);
 			this.btnUsePotion.Name = "btnUsePotion";
-			this.btnUsePotion.Size = new System.Drawing.Size(75, 28);
+			this.btnUsePotion.Size = new System.Drawing.Size(75, 40);
 			this.btnUsePotion.TabIndex = 12;
 			this.btnUsePotion.Text = "Use";
 			this.btnUsePotion.UseVisualStyleBackColor = true;
