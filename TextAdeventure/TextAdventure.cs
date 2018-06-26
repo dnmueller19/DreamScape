@@ -18,11 +18,13 @@ namespace TextAdeventure
 {
 	public partial class TextAdventure : Form
 	{
+	
 		private Player player;
 		private Monster currentMonster;
 
 		public TextAdventure()
 		{
+			
 			InitializeComponent();
 			//add player things here
 			player = new Player(10, 1, 20, 0, 10);
